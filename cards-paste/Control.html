@@ -1,0 +1,31 @@
+<div class="card dark-card">
+ <h2>Control X</h2>
+ <p>Use this button to control part of the project.</p>
+ <button onclick="runControlX()">Run Control X</button>
+ <div class="status-box" id="controlXStatus">Control X: waiting...</div>
+</div>
+
+<script>
+ function runControlX() {
+ fetch('/controlX')
+.then(response => response.text())
+.then(data => {
+ document.getElementById('controlXStatus').textContent = 'Control X: ' + data;
+ })
+.catch(error => {
+ document.getElementById('controlXStatus').textContent = 'Control X: error';
+ });
+ }
+</script>
+
+<!--
+Arduino backend example:
+
+else if (request.indexOf("GET /controlX") >= 0) {
+ // Do the control action here
+ // Example:
+ // digitalWrite(2,!digitalRead(2));
+
+ sendText(client, "done");
+}
+-->

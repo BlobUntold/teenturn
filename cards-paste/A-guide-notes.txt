@@ -1,0 +1,34 @@
+This file is a copy-and-paste library for your dashboard project.
+How to use it
+Find a card you want.
+Copy the whole block for that card.
+Paste it into your main index.html file.
+Keep the HTML and JavaScript together.
+Use the Arduino code comments to match the card to your Arduino sketch.
+
+
+Important rules
+Copy the entire card section, not just part of it.
+If a card has JavaScript, paste that too.
+If a card has an Arduino code comment, make sure your Arduino sketch has a matching route.
+Do not use the same id or function name twice unless you mean to control the same thing.
+Cards like Notes, Project Image, and New Section do not need Arduino code.
+
+Example
+If a card uses:
+
+fetch('/sensor1')
+
+then your Arduino sketch needs a matching route for /sensor1.
+Best way to work
+First paste the card into your page
+Then check the JavaScript
+Then add the matching Arduino route
+Then test one card at a time
+Simple reminder
+Each working interactive card usually has:
+
+HTML
+JavaScript
+Arduino backend route
+You need all 3 parts for it to work.

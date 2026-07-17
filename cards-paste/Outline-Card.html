@@ -1,0 +1,28 @@
+<div class="card outline-card">
+ <h2>Control X</h2>
+ <p>Use this button to control part of the project.</p>
+ <button onclick="runOutlineControlX()">Run Control X</button>
+ <div class="status-box" id="outlineControlXStatus">Control X: waiting...</div>
+</div>
+
+<script>
+ function runOutlineControlX() {
+ fetch('/controlX')
+.then(response => response.text())
+.then(data => {
+ document.getElementById('outlineControlXStatus').textContent = 'Control X: ' + data;
+ })
+.catch(error => {
+ document.getElementById('outlineControlXStatus').textContent = 'Control X: error';
+ });
+ }
+</script>
+
+<!--
+Arduino backend example:
+
+else if (request.indexOf("GET /controlX") >= 0) {
+ // Same route as the other Control X card
+ sendText(client, "done");
+}
+-->

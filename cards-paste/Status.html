@@ -1,0 +1,29 @@
+<div class="card blue-card">
+ <h2>Status X</h2>
+ <p>This shows a live status from the board.</p>
+ <div class="status-box" id="statusX">Status X: waiting...</div>
+</div>
+
+<script>
+ function updateStatusX() {
+ fetch('/statusX')
+.then(response => response.text())
+.then(data => {
+ document.getElementById('statusX').textContent = 'Status X: ' + data;
+ })
+.catch(error => {
+ document.getElementById('statusX').textContent = 'Status X: unavailable';
+ });
+ }
+
+ setInterval(updateStatusX, 1500);
+ updateStatusX();
+</script>
+
+<!--
+Arduino backend example:
+
+else if (request.indexOf("GET /statusX") >= 0) {
+ sendText(client, "running");
+}
+-->

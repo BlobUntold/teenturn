@@ -1,0 +1,35 @@
+<div class="card warning-card">
+ <h2>Warning</h2>
+ <p>This card can show a warning or alert.</p>
+ <div class="status-box" id="warningX">Warning: none</div>
+</div>
+
+<script>
+ function updateWarningX() {
+ fetch('/warningX')
+.then(response => response.text())
+.then(data => {
+ document.getElementById('warningX').textContent = 'Warning: ' + data;
+ })
+.catch(error => {
+ document.getElementById('warningX').textContent = 'Warning: unavailable';
+ });
+ }
+
+ setInterval(updateWarningX, 1500);
+ updateWarningX();
+</script>
+
+<!--
+Arduino backend example:
+
+else if (request.indexOf("GET /warningX") >= 0) {
+ int state = digitalRead(6);
+
+ if (state == LOW) {
+ sendText(client, "ACTIVE");
+ } else {
+ sendText(client, "none");
+ }
+}
+-->

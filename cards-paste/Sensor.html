@@ -1,0 +1,30 @@
+<div class="card light-card">
+ <h2>Sensor X</h2>
+ <p>This shows a live value from the board.</p>
+ <div class="status-box" id="sensorX">Sensor X: waiting...</div>
+</div>
+
+<script>
+ function updateSensorX() {
+ fetch('/sensorX')
+.then(response => response.text())
+.then(data => {
+ document.getElementById('sensorX').textContent = 'Sensor X: ' + data;
+ })
+.catch(error => {
+ document.getElementById('sensorX').textContent = 'Sensor X: unavailable';
+ });
+ }
+
+ setInterval(updateSensorX, 1500);
+ updateSensorX();
+</script>
+
+<!--
+Arduino backend example:
+
+else if (request.indexOf("GET /sensorX") >= 0) {
+ int value = analogRead(A0);
+ sendText(client, String(value));
+}
+-->

@@ -1,0 +1,49 @@
+
+<div class="card light-card">
+ <h2>Send Text</h2>
+ <p>Type a message and send it to the Arduino.</p>
+
+ <input
+ type="text"
+ id="textToArduino"
+ placeholder="Type text here"
+ style="width: 100%; padding: 12px; border-radius: 10px; border: 1px solid #ccc; margin-top: 10px; box-sizing: border-box;"
+ >
+
+ <button onclick="sendTextToArduino()">Send Text</button>
+
+ <div class="status-box" id="textSendStatus">Message: waiting...</div>
+</div>
+
+<script>
+ function sendTextToArduino() {
+ const text = document.getElementById('textToArduino').value;
+
+ fetch('/sendText?message=' + encodeURIComponent(text))
+.then(response => response.text())
+.then(data => {
+ document.getElementById('textSendStatus').textContent = 'Message: ' + data;
+ })
+.catch(error => {
+ document.getElementById('textSendStatus').textContent = 'Message: error';
+ });
+ }
+</script>
+
+<!--
+Arduino backend example:
+
+else if (request.indexOf("GET /sendText?message=") >= 0) {
+ int start = request.indexOf("message=") + 8;
+ int end = request.indexOf(" ", start);
+ String message = request.substring(start, end);
+
+ message.replace("%20", " ");
+ message.replace("+", " ");
+
+ Serial.println("Message received:");
+ Serial.println(message);
+
+ sendText(client, "received");
+}
+-->

@@ -1,0 +1,6 @@
+<div class="card blue-card span-2">
+ <h2>New Section</h2>
+ <p>This is a full-width section across both columns.</p>
+</div>
+
+<!-- Arduino: no backend needed -->
