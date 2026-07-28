@@ -220,6 +220,174 @@
  }
 </script>
 
+<div class="card light-card outline-card">
+ <h2>Sensor X</h2>
+ <p>This shows a live value from the board.</p>
+ <div class="status-box" id="sensorX">Sensor X: waiting...</div>
+</div>
+
+<script>
+ function updateSensorX() {
+ fetch('/sensorX')
+.then(response => response.text())
+.then(data => {
+ document.getElementById('sensorX').textContent = 'Sensor X: ' + data;
+ })
+.catch(error => {
+ document.getElementById('sensorX').textContent = 'Sensor X: unavailable';
+ });
+ }
+
+ setInterval(updateSensorX, 1500);
+ updateSensorX();
+</script>
+
+<!--
+Arduino backend example:
+
+else if (request.indexOf("GET /sensorX") >= 0) {
+ int value = analogRead(A0);
+ sendText(client, String(value));
+}
+-->
+
+<div class="card blue-card span-2">
+ <h2>Status X</h2>
+ <p>This shows a live status from the board.</p>
+ <div class="status-box" id="statusX">Status X: waiting...</div>
+</div>
+
+<script>
+ function updateStatusX() {
+ fetch('/statusX')
+.then(response => response.text())
+.then(data => {
+ document.getElementById('statusX').textContent = 'Status X: ' + data;
+ })
+.catch(error => {
+ document.getElementById('statusX').textContent = 'Status X: unavailable';
+ });
+ }
+
+ setInterval(updateStatusX, 1500);
+ updateStatusX();
+</script>
+
+<!--
+Arduino backend example:
+
+else if (request.indexOf("GET /statusX") >= 0) {
+ sendText(client, "running");
+}
+-->
+
+
+
+
+
+
+
+
+
+
+
+<div class="card light-card">
+ <h2>Send Text</h2>
+ <p>Type a message and send it to the Arduino.</p>
+
+ <input
+ type="text"
+ id="textToArduino"
+ placeholder="Type text here"
+ style="width: 100%; padding: 12px; border-radius: 10px; border: 1px solid #ccc; margin-top: 10px; box-sizing: border-box;"
+ >
+
+ <button onclick="sendTextToArduino()">Send Text</button>
+
+ <div class="status-box" id="textSendStatus">Message: waiting...</div>
+</div>
+
+<script>
+ function sendTextToArduino() {
+ const text = document.getElementById('textToArduino').value;
+
+ fetch('/sendText?message=' + encodeURIComponent(text))
+.then(response => response.text())
+.then(data => {
+ document.getElementById('textSendStatus').textContent = 'Message: ' + data;
+ })
+.catch(error => {
+ document.getElementById('textSendStatus').textContent = 'Message: error';
+ });
+ }
+</script>
+
+<!--
+Arduino backend example:
+
+else if (request.indexOf("GET /sendText?message=") >= 0) {
+ int start = request.indexOf("message=") + 8;
+ int end = request.indexOf(" ", start);
+ String message = request.substring(start, end);
+
+ message.replace("%20", " ");
+ message.replace("+", " ");
+
+ Serial.println("Message received:");
+ Serial.println(message);
+
+ sendText(client, "received");
+}
+-->
+
+<div class="card warning-card">
+ <h2>Warning</h2>
+ <p>This card can show a warning or alert.</p>
+ <div class="status-box" id="warningX">Warning: none</div>
+</div>
+
+<script>
+ function updateWarningX() {
+ fetch('/warningX')
+.then(response => response.text())
+.then(data => {
+ document.getElementById('warningX').textContent = 'Warning: ' + data;
+ })
+.catch(error => {
+ document.getElementById('warningX').textContent = 'Warning: unavailable';
+ });
+ }
+
+ setInterval(updateWarningX, 1500);
+ updateWarningX();
+</script>
+
+<!--
+Arduino backend example:
+
+else if (request.indexOf("GET /warningX") >= 0) {
+ int state = digitalRead(6);
+
+ if (state == LOW) {
+ sendText(client, "ACTIVE");
+ } else {
+ sendText(client, "none");
+ }
+}
+-->
+
+
+
+
+
+
+
+
+
+
+
+
+
 <!--
 Arduino backend example:
 
