@@ -96,5 +96,184 @@
 
  </div>
  </div>
+
+
+
+
+
+ <style>
+    /* =========================================================
+       STUDENT EDIT AREA: Change the colors below.
+       Keep the -- names. Only change the color values.
+       ========================================================= */
+   :root {
+  --page-background: #2a1020;
+  --dark-card: #9d174d;
+  --light-card: #fff1f2;
+  --blue-card: #db2777;
+  --warning-card: #fb7185;
+  --success-card: #10b981;
+  --purple-card: #7c3aed;
+  --button: #e11d48;
+  --button-hover: #be123c;
+  --light-text: #ffffff;
+  --dark-text: #1f2937;
+}
+
+    /* PAGE LAYOUT: Students usually do not need to edit this. */
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 20px;
+      font-family: Arial, sans-serif;
+      color: var(--light-text);
+      background: var(--page-background);
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .page-title,
+    .subtitle {
+      text-align: center;
+    }
+
+    .page-title {
+      margin-bottom: 8px;
+    }
+
+    .subtitle {
+      margin-top: 0;
+      margin-bottom: 28px;
+      color: #cbd5e1;
+    }
+
+    .dashboard {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 20px;
+    }
+
+    .span-2 {
+      grid-column: 1 / -1;
+    }
+
+    @media (max-width: 800px) {
+      .dashboard {
+        grid-template-columns: 1fr;
+      }
+
+      .span-2 {
+        grid-column: auto;
+      }
+    }
+
+    /* CARD STYLES */
+    .card {
+      min-height: 170px;
+      padding: 20px;
+      border-radius: 16px;
+      box-shadow: 0 8px 22px rgba(0, 0, 0, 0.2);
+    }
+
+    .card h2 {
+      margin-top: 0;
+    }
+
+    .dark-card {
+      color: var(--light-text);
+      background: var(--dark-card);
+    }
+
+    .light-card {
+      color: var(--dark-text);
+      background: var(--light-card);
+    }
+
+    .blue-card {
+      color: var(--light-text);
+      background: var(--blue-card);
+    }
+
+    .warning-card {
+      color: var(--dark-text);
+      background: var(--warning-card);
+    }
+
+    .success-card {
+      color: var(--light-text);
+      background: var(--success-card);
+    }
+
+    .purple-card {
+      color: var(--light-text);
+      background: var(--purple-card);
+    }
+
+    .outline-card {
+      color: var(--light-text);
+      background: transparent;
+      border: 2px solid #ffffff;
+    }
+
+    .status-box {
+      margin-top: 12px;
+      padding: 12px;
+      color: var(--dark-text);
+      background: rgba(255, 255, 255, 0.94);
+      border-radius: 10px;
+      font-weight: bold;
+    }
+
+    button {
+      margin-top: 10px;
+      padding: 12px 18px;
+      color: #ffffff;
+      background: var(--button);
+      border: 0;
+      border-radius: 10px;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: var(--button-hover);
+    }
+
+    button:disabled {
+      opacity: 0.65;
+      cursor: wait;
+    }
+
+    input[type="text"] {
+      width: 100%;
+      margin-top: 10px;
+      padding: 12px;
+      border: 1px solid #cbd5e1;
+      border-radius: 10px;
+      font-size: 1rem;
+    }
+
+    .project-image {
+      display: block;
+      width: 100%;
+      max-height: 300px;
+      margin-top: 12px;
+      border-radius: 12px;
+      object-fit: cover;
+    }
+
+    .small-note {
+      margin-bottom: 0;
+      font-size: 0.9rem;
+      opacity: 0.85;
+    }
+  </style>
 </body>
 </html>

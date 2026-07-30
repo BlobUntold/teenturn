@@ -1,0 +1,18 @@
+<!--
+Copy this card into the <div class="dashboard"> area.
+The button calls runControl1(), which changes to the next OLED screen.
+-->
+
+<div class="card purple-card">
+  <h2>OLED Screen</h2>
+  <p>Change the information shown on the small display.</p>
+  <button id="control1Button" type="button" onclick="runControl1()">Next Screen</button>
+  <div class="status-box" id="control1Status">Screen: waiting...</div>
+</div>
+
+<!-- Optional status-only card. Copy this separately if wanted. -->
+<div class="card outline-card">
+  <h2>Current Screen</h2>
+  <p>This card updates without pressing the control button.</p>
+  <div class="status-box" id="screenStatus">Screen: waiting...</div>
+</div>

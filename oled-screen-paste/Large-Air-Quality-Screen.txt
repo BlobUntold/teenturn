@@ -1,0 +1,24 @@
+// Replace the complete drawStudentScreen() function in sketch_Teenturn.ino
+// with this function. It makes the quality label large and easy to read.
+
+void drawStudentScreen() {
+  display.setTextSize(1);
+  display.setCursor(0, 0);
+  display.print("AIR QUALITY");
+  display.drawLine(0, 10, 127, 10, SSD1306_WHITE);
+
+  if (!dataValid) {
+    display.setCursor(8, 30);
+    display.print("Waiting for data...");
+    return;
+  }
+
+  display.setTextSize(2);
+  display.setCursor(0, 20);
+  display.print(getAirQualityLabel());
+
+  display.setTextSize(1);
+  display.setCursor(0, 50);
+  display.print(co2ppm);
+  display.print(" ppm CO2");
+}

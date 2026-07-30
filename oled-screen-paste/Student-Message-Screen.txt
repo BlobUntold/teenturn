@@ -1,0 +1,14 @@
+// Replace the complete drawStudentScreen() function in sketch_Teenturn.ino
+// with this function. Change the quoted words to personalize the display.
+
+void drawStudentScreen() {
+  display.setTextSize(2);
+  display.setCursor(8, 8);
+  display.print("HELLO!");
+
+  display.setTextSize(1);
+  display.setCursor(10, 34);
+  display.print("Our project is");
+  display.setCursor(28, 47);
+  display.print("working!");
+}

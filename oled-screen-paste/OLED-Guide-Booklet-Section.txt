@@ -1,0 +1,170 @@
+CUSTOMIZING THE OLED SCREEN
+
+The small OLED screen can display live information from the air-quality sensor. The starter code already includes four screens:
+
+0 — Overview: date, time, temperature, humidity, CO2, and air quality
+1 — Large CO2: a large CO2 number and air-quality level
+2 — Climate: temperature and humidity
+3 — Student Screen: a screen that you can customize
+
+
+CHANGING THE STARTING SCREEN
+
+Near the top of sketch_Teenturn.ino, find this line:
+
+const byte STARTING_SCREEN = 0;
+
+Change the number to choose which screen appears when the Arduino starts.
+
+Example:
+
+const byte STARTING_SCREEN = 3;
+
+This makes the Student Screen appear first.
+
+Use only 0, 1, 2, or 3.
+
+
+CHANGING THE WORDS ON THE SCREEN
+
+Near the top of sketch_Teenturn.ino, find the STUDENT SETTINGS section:
+
+const char PROJECT_NAME[] = "AIR MONITOR";
+const char CO2_LABEL[] = "CO2";
+const char TEMPERATURE_LABEL[] = "Temp";
+const char HUMIDITY_LABEL[] = "Humidity";
+
+Change only the words between quotation marks.
+
+Example:
+
+const char PROJECT_NAME[] = "ROOM CHECK";
+const char TEMPERATURE_LABEL[] = "Room Temp";
+
+Keep the quotation marks, semicolon, brackets, and variable name unchanged.
+
+
+SHOWING OR HIDING THE CLOCK
+
+Find this setting:
+
+const bool SHOW_CLOCK_HEADER = true;
+
+Use true to show the date and time on the overview screen.
+Use false to hide the date and time.
+
+
+CHANGING SCREENS FROM THE WEBSITE
+
+1. Open the cards-paste folder.
+2. Open OLED-Screen-Control.html.
+3. Copy the OLED control card.
+4. Paste it between the PASTE CARDS HERE markers in sketch_Teenturn.ino.
+5. Upload the sketch to the Arduino.
+6. Open the website using the IP address in Serial Monitor.
+7. Press Next Screen to move through screens 0, 1, 2, and 3.
+
+
+USING A READY-MADE STUDENT SCREEN
+
+Ready-made designs are stored in the oled-screen-paste folder:
+
+• Blank-Custom-Screen.txt
+• Large-Air-Quality-Screen.txt
+• Student-Message-Screen.txt
+
+To use one:
+
+1. Open the screen file you want.
+2. Copy the complete drawStudentScreen() function, including its opening and closing braces.
+3. Open sketch_Teenturn.ino.
+4. Find the section named STUDENT OLED PASTE AREA.
+5. Select the complete existing drawStudentScreen() function.
+6. Replace it with the copied function.
+7. Upload the sketch again.
+8. Change to screen 3 to see your design.
+
+Do not paste a second drawStudentScreen() function. Replace the old function so only one copy remains.
+
+
+MAKING YOUR OWN SCREEN
+
+Start with Blank-Custom-Screen.txt. These are the most useful display commands:
+
+display.setTextSize(1);
+Sets the text size. Try 1, 2, or 3.
+
+display.setCursor(0, 20);
+Chooses where the next text begins. The first number is the horizontal position. The second number is the vertical position.
+
+display.print("Hello!");
+Displays words. Words must be inside quotation marks.
+
+display.print(co2ppm);
+Displays the current CO2 value.
+
+display.print(temperature, 1);
+Displays the temperature with one decimal place.
+
+display.print(humidity, 1);
+Displays the humidity with one decimal place.
+
+display.print(getAirQualityLabel());
+Displays Good, Moderate, High CO2, or Waiting for data.
+
+display.drawLine(0, 10, 127, 10, SSD1306_WHITE);
+Draws a horizontal line across the screen.
+
+The OLED is 128 pixels wide and 64 pixels tall:
+
+• X positions go from 0 to 127.
+• Y positions go from 0 to 63.
+• The top-left corner is position 0, 0.
+
+The main program automatically clears and refreshes the display. Student screen code does not need display.clearDisplay() or display.display().
+
+
+EXAMPLE STUDENT SCREEN
+
+void drawStudentScreen() {
+  display.setTextSize(1);
+  display.setCursor(0, 0);
+  display.print("OUR CLASSROOM");
+  display.drawLine(0, 10, 127, 10, SSD1306_WHITE);
+
+  display.setCursor(0, 22);
+  display.print("CO2: ");
+  display.print(co2ppm);
+  display.print(" ppm");
+
+  display.setCursor(0, 38);
+  display.print("Air: ");
+  display.print(getAirQualityLabel());
+
+  display.setCursor(0, 54);
+  display.print("Temp: ");
+  display.print(temperature, 1);
+  display.print(" C");
+}
+
+
+TROUBLESHOOTING
+
+The screen is blank:
+• Check that the OLED is powered and connected to I2C.
+• Check that its address is 0x3C.
+• Open Serial Monitor and look for “OLED not found.”
+
+The Student Screen does not appear:
+• Set STARTING_SCREEN to 3, or use the website’s Next Screen button.
+• Make sure there is exactly one drawStudentScreen() function.
+
+The code does not compile:
+• Check every opening brace { has a closing brace }.
+• Check every display.print line ends with a semicolon.
+• Check that words are inside quotation marks.
+• Replace the whole drawStudentScreen() function instead of pasting one inside another.
+
+Values say zero or “Waiting for data”:
+• The SCD41 may take several seconds to provide its first measurement.
+• Check the sensor wiring and wait at least five seconds.
